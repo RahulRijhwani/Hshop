@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="170dp"
+    android:layout_height="248dp"
+    android:orientation="horizontal"
+    card_view:cardCornerRadius="0dp"
+    card_view:cardBackgroundColor="@color/bg4">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/bg6"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_margin="7dp"
+                android:background="@drawable/edittext2"
+                android:layout_height="18dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:padding="1dp"
+                    android:id="@+id/h_p_offer"
+                    android:textAlignment="center"
+                    android:text="100 % OFF"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="90dp"
+                android:background="@drawable/logo"
+                android:layout_gravity="center"
+                android:id="@+id/h_p_image"
+                android:layout_height="90dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:maxLines="2"
+                    android:textAlignment="center"
+                    android:text="Product Name"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:id="@+id/h_p_name"
+                    android:textColor="@color/bg3"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:text="1 Unit"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="7dp"
+                android:id="@+id/h_p_unit"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="\u20B9"
+                    android:layout_marginRight="3dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="304"
+                    android:id="@+id/h_p_actual_cost"
+                    android:background="@drawable/strike"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="\u20B9 "
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="304"
+                    android:id="@+id/h_p_offer_cost"
+                    android:textColor="@color/bg3"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/h_p_add"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext7"
+                android:text="ADD to cart"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/bg6"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

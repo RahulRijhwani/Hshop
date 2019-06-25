@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/l2"
+    android:layout_height="match_parent">
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="wrap_content"
+        android:elevation="2dp"
+        android:background="#fff"
+        android:layout_height="wrap_content">
+    </SearchView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gmail_list2"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="No Records"
+        android:visibility="gone" />
+    <com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:radius="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:color="@color/colorPrimary"
+        app:dd_numDots="3"
+        app:dd_scaleMultiplier="1.5"
+        app:dd_animationDuration="500"
+        app:dd_horizontalSpacing="4dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:id="@+id/linear_no_internet"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/emp_no_internet"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="No internet connection"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/bg2"
+            android:textSize="20dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:id="@+id/emp_empty_bucket"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/emp_search_no_result"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Sorry, No result found"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/bg2"
+            android:textSize="20dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Search using a more specific keyword"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/bg2"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

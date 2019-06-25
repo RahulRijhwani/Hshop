@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hshop.shopping.Order_details">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gmail_list2"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="No Records"
+        android:visibility="gone" />
+    <com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:radius="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:color="@color/colorPrimary"
+        app:dd_numDots="3"
+        app:dd_scaleMultiplier="1.5"
+        app:dd_animationDuration="500"
+        app:dd_horizontalSpacing="4dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:id="@+id/linear_no_internet"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/emp_no_internet"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="No internet connection"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/bg2"
+            android:textSize="20dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:id="@+id/emp_empty_bucket"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/emp_empty_order_history"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="You have no past orders"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/bg2"
+            android:textSize="20dp"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:text="Start Shopping"
+            android:id="@+id/start_shopping"
+            android:background="@drawable/edittext7"/>
+    </LinearLayout>
+</RelativeLayout>

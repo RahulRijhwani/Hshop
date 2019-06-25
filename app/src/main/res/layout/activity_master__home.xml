@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <include
+        layout="@layout/app_bar_master__home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true">
+    <!-- app:headerLayout="@layout/nav_header_master__home">
+     app:menu="@menu/activity_master__home_drawer" >-->
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/header"
+                layout="@layout/nav_header_master__home"/>
+
+            <pl.openrnd.multilevellistview.MultiLevelListView
+                android:id="@+id/multiLevelMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:alwaysExtended="false"
+                app:nestType="multiple" />
+        </LinearLayout>
+
+
+    </android.support.design.widget.NavigationView>
+
+<!--    <android.support.v7.view.menu.ExpandedMenuView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_master__home"
+        app:menu="@menu/activity_master__home_drawer" />
+-->
+</android.support.v4.widget.DrawerLayout>

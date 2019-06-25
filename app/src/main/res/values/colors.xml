@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1C2124</color>
+    <color name="colorPrimaryDark">#131718</color>
+    <color name="colorAccent">#2E8B57</color>
+    <color name="colorAccent1">#ff4800</color>
+    <color name="red">#bc440b</color>
+
+    <color name="switch_thumb_normal">#ffa5cd39</color>
+    <color name="Yellow">#ffffff00</color>
+    <color name="white">#ffffff</color>
+    <color name="background">#c4c4c4</color>
+
+    <color name="level_0">#1abc9c</color>
+    <color name="level_1">#3498db</color>
+    <color name="level_2">#e67e22</color>
+    <color name="level_3">#8e44ad</color>
+    <color name="level_4">#f1c40f</color>
+    <color name="level_5">#2ecc71</color>
+    <color name="level_default">#000000</color>
+    <color name="black">#000</color>
+
+
+    <color name="back">#FF58B358</color>
+
+    <color name="text2">#000000</color>
+    <color name="bg1">#2E8B57</color>
+    <color name="bg12">#2E8B57</color>
+    <color name="bg2">#1C2124</color>
+    <color name="bg3">#000000</color>
+    <color name="bg4">#ffffff</color>
+    <color name="bg5">#000000</color>
+    <color name="bg6">#EEEEEE</color>
+    <color name="bg7">#2E8B57</color>
+    <color name="bg8">#2E8B57</color>
+    <color name="bg9">#fadebd</color>
+    <color name="slow_grey">#86F0F5F7</color>
+    <color name="p_darkgrey">#757575</color>
+    <color name="p_darkgrey1">#9EA1A2</color>
+
+</resources>
