@@ -153,7 +153,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             }
 
                         } else {
+                            Toast.makeText(Register.this, "Server Error", Toast.LENGTH_SHORT).show();
                         }
+
                     } else {
                         // response received but request not successful (like 400,401,403 etc)
                         //Handle errors

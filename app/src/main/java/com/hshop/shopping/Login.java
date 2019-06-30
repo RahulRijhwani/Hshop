@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.hshop.R;
 import com.hshop.models.UserLogin;
 import com.hshop.rest.Config;
@@ -31,6 +32,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText edt_lcontact,edt_lpassword;
     String status,contact,password;
     LinearLayout linear_server;
+    String token="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         txt_signup.setOnClickListener(this);
         txt_terms.setOnClickListener(this);
         linear_server = (LinearLayout) findViewById(R.id.linear_server);
+        token= FirebaseInstanceId.getInstance().getToken();
     }
 
     @Override
@@ -73,7 +76,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     }
                     else
                     {
-                        checklogin(contact,password);
+                        checklogin(contact,password,token);
                     }
                 }
                 break;
@@ -94,13 +97,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private void checklogin(String contact, String password) {
+    private void checklogin(String contact, String password,String token) {
 
         final DilatingDotsProgressBar mDilatingDotsProgressBar = (DilatingDotsProgressBar) findViewById(R.id.progress);
         mDilatingDotsProgressBar.showNow();
 
         RestClient.GitApiInterface service = RestClient.getClient();
-        Call<UserLogin> call = service.getUserLogin(Config.mem_string,contact,password);
+        Call<UserLogin> call = service.getUserLogin(Config.mem_string,contact,password,token);
         call.enqueue(new Callback<UserLogin>() {
             public SharedPreferences.Editor f2467p2;
             public SharedPreferences.Editor f2467p1;
