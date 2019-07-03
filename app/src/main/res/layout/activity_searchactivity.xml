@@ -31,6 +31,12 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
         <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/voice_search"
+            android:background="@android:drawable/ic_btn_speak_now"/>
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

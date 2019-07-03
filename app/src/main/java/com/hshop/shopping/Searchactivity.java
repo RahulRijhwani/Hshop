@@ -1,9 +1,18 @@
     package com.hshop.shopping;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.speech.RecognizerIntent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,17 +64,42 @@ public class Searchactivity extends AppCompatActivity{
     String user_id,status;
     private EditText searchBox;
     AllSearch result;
-    ImageView img_search;
+    ImageView img_search,voice_search;
     String edt_serach_text;
     List<AllSearchProduct> getallSearchProduct1 = new ArrayList<>();
     List<AllSearchProduct> getallSearchProduct4 = new ArrayList<>();
     List<AllSearchProduct> gad;
+    private static final int REQUEST_CODE = 1234;
 
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(Searchactivity.this,
+                        Manifest.permission.READ_CONTACTS)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                } else {
+                    // No explanation needed; request the permission
+                    ActivityCompat.requestPermissions(Searchactivity.this,
+                            new String[]{Manifest.permission.READ_CONTACTS},REQUEST_CODE);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            }
+            else{
+//                voice_search.setEnabled(true);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchactivity);
+        checkPermission();
 
         recyclerView = (RecyclerView) findViewById(R.id.gmail_list);
         empty_view = (TextView) findViewById(R.id.empty_view);
@@ -74,6 +108,7 @@ public class Searchactivity extends AppCompatActivity{
         user_id = C0456b.f2467p.getString("user_id", null);
         searchBox = (EditText)findViewById(R.id.search_box);
         img_search = (ImageView) findViewById(R.id.img_search);
+        voice_search=(ImageView)findViewById(R.id.voice_search) ;
 
  /*       searchBox.requestFocus();
         InputMethodManager imm = (InputMethodManager)getSystemService(
@@ -308,6 +343,12 @@ public class Searchactivity extends AppCompatActivity{
         } );
 
 
+        voice_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startVoiceRecognitionActivity();
+            }
+        });
 
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -340,7 +381,33 @@ public class Searchactivity extends AppCompatActivity{
 
 
 
-
+    private void startVoiceRecognitionActivity()
+    {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Voice recognition Demo...");
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK)
+        {
+            // Populate the wordsList with the String values the recognition engine thought it heard
+            ArrayList<String> matches = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS);
+            if(!matches.isEmpty())
+            {
+                searchBox.setText(matches.get(0).toString());
+            }
+           // Log.d("speech text",matches.get(0).toString());
+            //searchBox.setText(matches);
+//            wordsList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+//                    matches));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void dataadd(String pro_name, String user_id) {
         {
