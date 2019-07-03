@@ -3,6 +3,7 @@ package com.hshop.shopping;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.hshop.R;
 import com.hshop.models.UserLogin;
 import com.hshop.rest.Config;
@@ -49,7 +53,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         txt_signup.setOnClickListener(this);
         txt_terms.setOnClickListener(this);
         linear_server = (LinearLayout) findViewById(R.id.linear_server);
-        token= FirebaseInstanceId.getInstance().getToken();
+        //token= FirebaseInstanceId.getInstance().getToken();
+        Log.e("newToken",token);
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( Login.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                token = instanceIdResult.getToken();
+               // Log.d("newToken",token);
+                //Toast.makeText(Login.this, token, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        ).addOnFailureListener(Login.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //Log.e("token error",e.toString());
+            }
+        });
     }
 
     @Override
