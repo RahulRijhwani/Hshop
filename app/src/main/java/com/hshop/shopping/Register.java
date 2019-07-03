@@ -3,6 +3,7 @@ package com.hshop.shopping;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.hshop.R;
 import com.hshop.models.RegisterUser;
 import com.hshop.rest.Config;
@@ -31,6 +35,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     RadioButton edt_mr,edt_mrs;
     String status,mem_contact;
     String edt_gender1;
+    String token= "";
     EditText edt_fname,edt_lname,edt_contact,edt_email,edt_password,edt_confirmpassword,edt_houseno,edt_society,edt_locality,edt_pincode;
     String edt_fname1,edt_lname1,edt_contact1,edt_email1,edt_password1,edt_confirmpassword1,edt_houseno1,edt_society1,edt_locality1,edt_pincode1;
     @Override
@@ -90,7 +95,22 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private void setRegisterUser() {
         /*String android_id = Settings.Secure.getString(Register.this.getContentResolver(),
                     Settings.Secure.ANDROID_ID);*/
-        String token= FirebaseInstanceId.getInstance().getToken();
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( Register.this,  new OnSuccessListener<InstanceIdResult>() {
+                    @Override
+                    public void onSuccess(InstanceIdResult instanceIdResult) {
+                        token = instanceIdResult.getToken();
+                        // Log.d("newToken",token);
+                        //Toast.makeText(Login.this, token, Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+        ).addOnFailureListener(Register.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //Log.e("token error",e.toString());
+            }
+        });
         String android_id = token;
 
         edt_fname1 = edt_fname.getText().toString();
