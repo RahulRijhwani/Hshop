@@ -1,5 +1,6 @@
 package com.hshop.Service;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -25,6 +26,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "FirebaseMessageService";
     Bitmap bitmap;
+    int importance = NotificationManager.IMPORTANCE_HIGH;
+
 
     @Override
     public void onNewToken(String s) {
@@ -87,11 +90,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //intent.putExtra("AnotherActivity", TrueOrFalse);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
+        Log.d(TAG,"firebase start");
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setLargeIcon(image)/*Notification icon image*/
-                .setSmallIcon(R.drawable.logo)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(
+                    "chennel-1", "default", importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,"chennel-1")
+                .setSmallIcon(R.drawable.h_logo)
                 .setContentTitle(messageBody)
                 .setStyle(new NotificationCompat.BigPictureStyle()
                         .bigPicture(image))/*Notification with Image*/
@@ -99,10 +108,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
     }
 
     /*

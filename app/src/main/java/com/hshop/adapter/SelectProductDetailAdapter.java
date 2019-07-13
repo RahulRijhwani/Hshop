@@ -254,6 +254,7 @@ public class SelectProductDetailAdapter extends RecyclerView.Adapter<SelectProdu
                     i1.putExtra("pro_name", String.format(res.getString(R.string.txt_message223), getAllProductLists.get(i).getPro_name()));
                     i1.putExtra("pro_unit_id", product_unit_id);
                     i1.putExtra("unittext", unittext.getText().toString());
+                    i1.putExtra("type","proid");
                     i1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(i1);
                     ;

@@ -54,12 +54,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         txt_terms.setOnClickListener(this);
         linear_server = (LinearLayout) findViewById(R.id.linear_server);
         //token= FirebaseInstanceId.getInstance().getToken();
-        Log.e("newToken",token);
+        //Log.e("newToken",token);
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( Login.this,  new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 token = instanceIdResult.getToken();
-               // Log.d("newToken",token);
+                Log.d("newToken",token);
                 //Toast.makeText(Login.this, token, Toast.LENGTH_SHORT).show();
             }
 
@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         ).addOnFailureListener(Login.this, new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                //Log.e("token error",e.toString());
+                Log.e("token error",e.toString());
             }
         });
     }
@@ -96,6 +96,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     }
                     else
                     {
+
+                        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( Login.this,  new OnSuccessListener<InstanceIdResult>() {
+                                    @Override
+                                    public void onSuccess(InstanceIdResult instanceIdResult) {
+                                        token = instanceIdResult.getToken();
+                                        Log.d("newToken",token);
+                                        //Toast.makeText(Login.this, token, Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                        ).addOnFailureListener(Login.this, new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("token error",e.toString());
+                            }
+                        });
                         checklogin(contact,password,token);
                     }
                 }

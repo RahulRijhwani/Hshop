@@ -133,7 +133,7 @@ public class RestClient {
 
         @FormUrlEncoded
         @POST("API/fetch_product_details.php")
-        Call<ProductDetails> getProductDetails(@Field("mem_string") String mem_string,@Field("pro_id") String pro_id1,@Field("user_id") String user_id1);
+        Call<ProductDetails> getProductDetails(@Field("mem_string") String mem_string,@Field("pro_id") String pro_id1,@Field("user_id") String user_id1,@Field("type") String type);
 
         @FormUrlEncoded
         @POST("API/user_product_add_cart.php")

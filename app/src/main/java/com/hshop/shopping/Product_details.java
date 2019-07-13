@@ -33,7 +33,7 @@ import retrofit.Response;
 
 public class Product_details extends AppCompatActivity {
 
-    String user_id,pro_id,pro_name;
+    String user_id,pro_id,pro_name,type;
     String pro_unit_id="",unittext="";
     TextView  empty_view;
     RecyclerView recyclerView;
@@ -52,6 +52,7 @@ public class Product_details extends AppCompatActivity {
         Intent i1 = getIntent();
         pro_id = i1.getStringExtra("pro_id");
         pro_name = i1.getStringExtra("pro_name");
+        type=i1.getStringExtra("type");
 
         try{
             pro_unit_id= i1.getStringExtra("pro_unit_id");
@@ -75,7 +76,7 @@ public class Product_details extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         }
 
-        fetchproduct(pro_id,user_id);
+        fetchproduct(pro_id,user_id,type);
 
 
 
@@ -188,12 +189,12 @@ public class Product_details extends AppCompatActivity {
         return mCartItemCount;
     }
 
-    public void fetchproduct(String pro_id,String user_id) {
+    public void fetchproduct(String pro_id,String user_id,String type) {
         final DilatingDotsProgressBar mDilatingDotsProgressBar = (DilatingDotsProgressBar) findViewById(R.id.progress);
         mDilatingDotsProgressBar.showNow();
         RestClient.GitApiInterface service = RestClient.getClient();
 
-        Call<ProductDetails> call = service.getProductDetails(Config.mem_string,pro_id,user_id);
+        Call<ProductDetails> call = service.getProductDetails(Config.mem_string,pro_id,user_id,type);
         call.enqueue(new Callback<ProductDetails>() {
             @Override
             public void onResponse(Response<ProductDetails> response) {
@@ -212,6 +213,7 @@ public class Product_details extends AppCompatActivity {
                                 getallHomeAllProductLists.addAll(result.getData());
                                 getallHomeAllProductUnitLists.clear();
                                 getallHomeAllProductUnitLists.addAll(result.getProduct_data());
+                                setTitle(getallHomeAllProductLists.get(0).getPro_name().toString());
                                 adapter.notifyDataSetChanged();
 
                                 if (getallHomeAllProductLists.isEmpty()) {

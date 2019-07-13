@@ -61,6 +61,7 @@ public class RecyclerAdapter1 extends ExpandableRecyclerViewAdapter<OSViewHolder
                 Intent i1 = new Intent(activity,Product_details.class);
                 i1.putExtra("pro_id",seperatr_data[8]);
                 i1.putExtra("pro_name",seperatr_data[0]);
+                i1.putExtra("type","proid");
                 activity.startActivity(i1);;
 
             }

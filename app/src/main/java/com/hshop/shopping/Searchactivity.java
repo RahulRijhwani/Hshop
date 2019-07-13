@@ -35,6 +35,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.hshop.R;
 import com.hshop.adapter.SelectSearchDetailAdapter;
 import com.hshop.models.AllSearch;
@@ -70,6 +72,14 @@ public class Searchactivity extends AppCompatActivity{
     List<AllSearchProduct> getallSearchProduct4 = new ArrayList<>();
     List<AllSearchProduct> gad;
     private static final int REQUEST_CODE = 1234;
+    public final int CUSTOMIZED_REQUEST_CODE = 0x0000ffff;
+
+    public void scanBarcode(View view) {
+        new IntentIntegrator(this).initiateScan();
+    }
+
+
+
 
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -386,8 +396,8 @@ public class Searchactivity extends AppCompatActivity{
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Voice recognition Demo...");
-        startActivityForResult(intent, REQUEST_CODE);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Voice Search");
+        s   tartActivityForResult(intent, REQUEST_CODE);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -400,13 +410,51 @@ public class Searchactivity extends AppCompatActivity{
             if(!matches.isEmpty())
             {
                 searchBox.setText(matches.get(0).toString());
+               /* dataadd(searchBox.getText().toString(),user_id);
+                callEventData(Config.mem_string,user_id,searchBox.getText().toString());
+                Intent i1 = new Intent(Searchactivity.this,Product.class);
+                i1.putExtra("search",searchBox.getText().toString());
+                i1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i1);*/
             }
-           // Log.d("speech text",matches.get(0).toString());
+            // Log.d("speech text",matches.get(0).toString());
             //searchBox.setText(matches);
 //            wordsList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
 //                    matches));
         }
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode != CUSTOMIZED_REQUEST_CODE && requestCode != IntentIntegrator.REQUEST_CODE) {
+            // This is important, otherwise the result will not be passed to the fragment
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+        switch (requestCode) {
+            case CUSTOMIZED_REQUEST_CODE: {
+                Toast.makeText(this, "REQUEST_CODE = " + requestCode, Toast.LENGTH_LONG).show();
+                break;
+            }
+            default:
+                break;
+        }
+
+        IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
+
+        if(result.getContents() == null) {
+           /* Log.d("MainActivity", "Cancelled scan");
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();*/
+        } else {
+           /* Log.d("MainActivity", "Scanned"+result.getContents());
+            Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();*/
+           String code=result.getContents();
+            Intent i1 = new Intent(Searchactivity.this,Product_details.class);
+            i1.putExtra("pro_id",code);
+            i1.putExtra("pro_name","");
+            i1.putExtra("type","barcode");
+            startActivity(i1);;
+        }
+
+
     }
 
     private void dataadd(String pro_name, String user_id) {
